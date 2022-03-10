@@ -1,207 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title> Hexo</title>
-  <title> Hexo</title>
-  
-    <link rel="apple-touch-icon" sizes="57x57" href="/images/icons/apple-touch-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="/images/icons/apple-touch-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="/images/icons/apple-touch-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="/images/icons/apple-touch-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="/images/icons/apple-touch-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="/images/icons/apple-touch-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="/images/icons/apple-touch-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/images/icons/apple-touch-icon-180x180.png">
-    <link rel="apple-touch-icon" sizes="167x167" href="/images/icons/apple-touch-icon-167x167.png">
-  
-  
-    <link rel="shortcut icon" href="/favicon.ico">
-  
-  
-<link rel="stylesheet" href="/css/style.css">
+{% extends '_layout.swig' %}
+{% import '_macro/post.swig' as post_template %}
+{% import '_macro/sidebar.swig' as sidebar_template %}
 
-<meta name="generator" content="Hexo 6.0.0"></head>
 
-<body>
-  <main class="main">
-    
-	<header class="header">
+{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
 
-	<div class="container">
-		<nav class="navbar d-flex justify-content-between align-items-center">
-			<a class="brand" href="/">
-				<img class="logo" src="/images/brand.svg" alt="Hexo" role="img">
-			</a>
-			<ul class="main-nav">
-  
-    
-  <li class="nav-item ">
-    <a class="nav-item-link" href="/">首页</a>
-  </li>
-  
-    
-  <li class="nav-item ">
-    <a class="nav-item-link" href="/gallery">画廊</a>
-  </li>
-  
-    
-  <li class="nav-item ">
-    <a class="nav-item-link" href="/stories">案例</a>
-  </li>
-  
-    
-  <li class="nav-item ">
-    <a class="nav-item-link" href="/archives">新闻</a>
-  </li>
-  
-    
-  <li class="nav-item ">
-    <a class="nav-item-link" href="/about">关于</a>
-  </li>
-  
-</ul>
-		</nav>
-		<a id="mobile-nav-toggle">
-			<span class="mobile-nav-toggle-bar"></span>
-			<span class="mobile-nav-toggle-bar"></span>
-			<span class="mobile-nav-toggle-bar"></span>
-		</a>
-	</div>
-</header>
+{% block page_class %}page-post-detail{% endblock %}
 
-    <section>
-      <div class="container">
-  <article id="post-Linux-hexo-github-blog" class="article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  
-  
-  <div class="artcle-cover mb-5">
-    
-  </div>
-  
-  <div class="article-inner">
-    
-    <div class="article-entry" itemprop="articleBody">
-      <p>title: Linux-hexo-github-blog</p>
-<h1 id="download-git-npm-nodejs"><a href="#download-git-npm-nodejs" class="headerlink" title="download git npm nodejs"></a>download git npm nodejs</h1><ul>
-<li>sudo emerge -av nodejs git</li>
-</ul>
-<h1 id="使用npm安装hexo-cli"><a href="#使用npm安装hexo-cli" class="headerlink" title="使用npm安装hexo-cli"></a>使用npm安装hexo-cli</h1><ul>
-<li>sudo npm install hexo-cli -g</li>
-</ul>
-<h1 id="使用软链接将hexo添加到全局"><a href="#使用软链接将hexo添加到全局" class="headerlink" title="使用软链接将hexo添加到全局"></a>使用软链接将hexo添加到全局</h1><ul>
-<li>ln -s &#x2F;opt&#x2F;nodejs&#x2F;lib&#x2F;node_modules&#x2F;hexo-cli&#x2F;bin&#x2F;hexo &#x2F;usr&#x2F;local&#x2F;bin&#x2F;hexo</li>
-</ul>
-<h1 id="mkdir-Myblog-and-init-hexo"><a href="#mkdir-Myblog-and-init-hexo" class="headerlink" title="mkdir Myblog and init hexo"></a>mkdir Myblog and init hexo</h1><ul>
-<li>mkdir Myblog</li>
-<li>hexo init </li>
-<li>cd Myblod</li>
-</ul>
-<h1 id="use-github"><a href="#use-github" class="headerlink" title="use github"></a>use github</h1><ul>
-<li>…….creat repos and add shhkey</li>
-</ul>
-<h1 id="modify-the-config-yml"><a href="#modify-the-config-yml" class="headerlink" title="modify the _config.yml"></a>modify the _config.yml</h1><p>-Deployment<br>-Docs: <a target="_blank" rel="noopener" href="https://hexo.io/docs/deployment.html">https://hexo.io/docs/deployment.html</a><br>-deploy:</p>
-<ul>
-<li>type: git</li>
-<li>repo: git仓库地址</li>
-<li>branch: master<h1 id="end"><a href="#end" class="headerlink" title="end"></a>end</h1></li>
-<li>npm install –save hexo-deployer-git</li>
-<li>hexo g<br>hexo d</li>
-</ul>
 
-    </div>
-    <footer class="article-footer">
-      
-    </footer>
-  </div>
-  
-  
-    
+{% block content %}
 
-  
-</article>
-</div>
-    </section>
-    <footer class="footer pt-5 mt-5">
-  <div class="container">
-    <div class="py-3">
-      <div class="row justify-content-between">
-        <div class="col-6">
-          <img class="filter-gray mb-3" height="40" src="/images/brand.svg" alt="Hexo" role="img">
-          <p class="mb-4"></p>
-          <ul class="list-inline">
-            
-          </ul>
-        </div>
-        <div class="col-4">
-          <h5>友情链接</h5>
-          <ul class="list-inline">
-            
-          </ul>
-        </div>
-      </div>
-    </div>
-    <hr class="hr" style="opacity: .25;">
-    <div class="pt-3 pb-5">
-      <ul class="list-inline mb-0 text-center">
-        <li class="list-inline-item">&copy; 2022 Hexo</li>
-        
-        <li class="list-inline-item">Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
-        <li class="list-inline-item">Designer <a href="https://acorn.imaging.xin/" target="_blank">John Doe</a></li>
-      </ul>
+  <div id="posts" class="posts-expand">
+    {{ post_template.render(page) }}
+
+    <div class="post-spread">
+      {% if theme.jiathis %}
+        {% include '_partials/share/jiathis.swig' %}
+      {% elseif theme.baidushare %}
+        {% include '_partials/share/baidushare.swig' %}
+      {% elseif theme.add_this_id %}
+        {% include '_partials/share/add-this.swig' %}
+      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
+        {% include '_partials/share/duoshuo_share.swig' %}
+      {% endif %}
     </div>
   </div>
-</footer>
-  </main>
-  <div id="mobile-nav-dimmer"></div>
-<div id="mobile-nav">
-	<div id="mobile-nav-inner">
-		<ul class="mobile-nav">
-  
-    
-  <li class="nav-item ">
-    <a class="nav-item-link" href="/">首页</a>
-  </li>
-  
-    
-  <li class="nav-item ">
-    <a class="nav-item-link" href="/gallery">画廊</a>
-  </li>
-  
-    
-  <li class="nav-item ">
-    <a class="nav-item-link" href="/stories">案例</a>
-  </li>
-  
-    
-  <li class="nav-item ">
-    <a class="nav-item-link" href="/archives">新闻</a>
-  </li>
-  
-    
-  <li class="nav-item ">
-    <a class="nav-item-link" href="/about">关于</a>
-  </li>
-  
-</ul>
-	</div>
-</div>
 
-  
-<script src="//cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+{% endblock %}
 
+{% block sidebar %}
+  {{ sidebar_template.render(true) }}
+{% endblock %}
 
-<script src="//cdnjs.cloudflare.com/ajax/libs/tocbot/4.11.1/tocbot.min.js"></script>
-
-
-<script src="/js/script.js"></script>
-
-
-<script src="/js/mobile-nav.js"></script>
-
-</body>
-</html>
+{% block script_extra %}
+  {% include '_scripts/pages/post-details.swig' %}
+{% endblock %}

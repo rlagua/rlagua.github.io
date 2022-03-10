@@ -1,215 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>Archives |  Hexo</title>
-  <title>Archives |  Hexo</title>
-  
-    <link rel="apple-touch-icon" sizes="57x57" href="/images/icons/apple-touch-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="/images/icons/apple-touch-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="/images/icons/apple-touch-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="/images/icons/apple-touch-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="/images/icons/apple-touch-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="/images/icons/apple-touch-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="/images/icons/apple-touch-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/images/icons/apple-touch-icon-180x180.png">
-    <link rel="apple-touch-icon" sizes="167x167" href="/images/icons/apple-touch-icon-167x167.png">
-  
-  
-    <link rel="shortcut icon" href="/favicon.ico">
-  
-  
-<link rel="stylesheet" href="/css/style.css">
+{% extends '_layout.swig' %}
+{% import '_macro/post-collapse.swig' as post_template %}
+{% import '_macro/sidebar.swig' as sidebar_template %}
 
-<meta name="generator" content="Hexo 6.0.0"></head>
+{% block title %}{{ __('title.archive') }} | {{ config.title }}{% endblock %}
 
-<body>
-  <main class="main">
-    
-	<header class="header">
+{% block page_class %}page-archive{% endblock %}
 
-	<div class="container">
-		<nav class="navbar d-flex justify-content-between align-items-center">
-			<a class="brand" href="/">
-				<img class="logo" src="/images/brand.svg" alt="Hexo" role="img">
-			</a>
-			<ul class="main-nav">
-  
-    
-  <li class="nav-item ">
-    <a class="nav-item-link" href="/">首页</a>
-  </li>
-  
-    
-  <li class="nav-item ">
-    <a class="nav-item-link" href="/gallery">画廊</a>
-  </li>
-  
-    
-  <li class="nav-item ">
-    <a class="nav-item-link" href="/stories">案例</a>
-  </li>
-  
-    
-  <li class="nav-item active">
-    <a class="nav-item-link" href="/archives">新闻</a>
-  </li>
-  
-    
-  <li class="nav-item ">
-    <a class="nav-item-link" href="/about">关于</a>
-  </li>
-  
-</ul>
-		</nav>
-		<a id="mobile-nav-toggle">
-			<span class="mobile-nav-toggle-bar"></span>
-			<span class="mobile-nav-toggle-bar"></span>
-			<span class="mobile-nav-toggle-bar"></span>
-		</a>
-	</div>
-</header>
+{% block content %}
 
-    <section>
-      <div class="container">
-  <div class="page-heading">
-  <!-- page-type-title -->
-  
-    
-<h1 class="page-type-title">Archives</h1>
-  
-  <!-- page-type-slogan -->
-  <h5 class="slogan font-w-lighter text-gray">
-    
-    汇聚热点话题 打造创新思路
-    
-  </h5>
-</div>
-  
-  
-  
-  
-  
-  
+  {#####################}
+  {### ARCHIVE BLOCK ###}
+  {#####################}
+  <div class="post-block archive">
+    <div id="posts" class="posts-collapse">
+      <span class="archive-move-on"></span>
 
-<section class="archives-wrap">
-  <div class="archive-year-wrap">
-    <a href="/archives/2022" class="archive-year">2022</a>
-  </div>
-  <div class="archives">
-    <div class="row flex-wrap">
-      
-      <div class="col-3">
-  <article class="archive-article archive-type-post">
-    <div class="card rounded">
-      
-      <div class="card-body bg-light">
-        
-        <time class="text-gray" datetime="2022-03-10T13:26:38.637Z" itemprop="datePublished">
-  2022-03-10
-</time>
-        <div class="card-text mt-3 line-clamp line-clamp-2"></div>
-        <hr class="hr">
-        
-        <div class="article-more-link">
-          <a href="/2022/03/10/Linux-hexo-github-blog/#more">阅读全文</a>
-        </div>
-        
-      </div>
-    </div>
-  </article>
-</div>
-      
-      
+      <span class="archive-page-counter">
+        {% set cheers %}
+        {% set posts_length = site.posts.length %}
+        {% if posts_length > 210 %} {% set cheers = 'excellent' %}
+          {% elif posts_length > 130 %} {% set cheers = 'great' %}
+          {% elif posts_length > 80 %} {% set cheers = 'good' %}
+          {% elif posts_length > 50 %} {% set cheers = 'nice' %}
+          {% elif posts_length > 30 %} {% set cheers = 'ok' %}
+        {% else %}
+          {% set cheers = 'um' %}
+        {% endif %}
+        {{ __('cheers.' + cheers) }}! {{ _p("counter.archive_posts", site.posts.length) }} {{ __('keep_on') }}
+      </span>
+
+      {% for post in page.posts %}
+
+        {# Show year #}
+        {% set year %}
+        {% set post.year = date(post.date, 'YYYY') %}
+
+        {% if post.year !== year %}
+          {% set year = post.year %}
+          <div class="collection-title">
+            <{% if theme.seo %}h2{% else %}h1{% endif %} class="archive-year" id="archive-year-{{ year }}">{{ year }}</{% if theme.seo %}h2{% else %}h1{% endif %}>
+          </div>
+        {% endif %}
+        {# endshow #}
+
+        {{ post_template.render(post) }}
+
+      {% endfor %}
+
     </div>
   </div>
-</section>
+  {#########################}
+  {### END ARCHIVE BLOCK ###}
+  {#########################}
 
+  {% include '_partials/pagination.swig' %}
 
+{% endblock %}
 
-
-</div>
-    </section>
-    <footer class="footer pt-5 mt-5">
-  <div class="container">
-    <div class="py-3">
-      <div class="row justify-content-between">
-        <div class="col-6">
-          <img class="filter-gray mb-3" height="40" src="/images/brand.svg" alt="Hexo" role="img">
-          <p class="mb-4"></p>
-          <ul class="list-inline">
-            
-          </ul>
-        </div>
-        <div class="col-4">
-          <h5>友情链接</h5>
-          <ul class="list-inline">
-            
-          </ul>
-        </div>
-      </div>
-    </div>
-    <hr class="hr" style="opacity: .25;">
-    <div class="pt-3 pb-5">
-      <ul class="list-inline mb-0 text-center">
-        <li class="list-inline-item">&copy; 2022 Hexo</li>
-        
-        <li class="list-inline-item">Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
-        <li class="list-inline-item">Designer <a href="https://acorn.imaging.xin/" target="_blank">John Doe</a></li>
-      </ul>
-    </div>
-  </div>
-</footer>
-  </main>
-  <div id="mobile-nav-dimmer"></div>
-<div id="mobile-nav">
-	<div id="mobile-nav-inner">
-		<ul class="mobile-nav">
-  
-    
-  <li class="nav-item ">
-    <a class="nav-item-link" href="/">首页</a>
-  </li>
-  
-    
-  <li class="nav-item ">
-    <a class="nav-item-link" href="/gallery">画廊</a>
-  </li>
-  
-    
-  <li class="nav-item ">
-    <a class="nav-item-link" href="/stories">案例</a>
-  </li>
-  
-    
-  <li class="nav-item active">
-    <a class="nav-item-link" href="/archives">新闻</a>
-  </li>
-  
-    
-  <li class="nav-item ">
-    <a class="nav-item-link" href="/about">关于</a>
-  </li>
-  
-</ul>
-	</div>
-</div>
-
-  
-<script src="//cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-
-
-<script src="//cdnjs.cloudflare.com/ajax/libs/tocbot/4.11.1/tocbot.min.js"></script>
-
-
-<script src="/js/script.js"></script>
-
-
-<script src="/js/mobile-nav.js"></script>
-
-</body>
-</html>
+{% block sidebar %}
+  {{ sidebar_template.render(false) }}
+{% endblock %}
